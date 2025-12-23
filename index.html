@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>🎄 Quà Giáng Sinh cho Thùy Dương 🎁</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    height:100vh;
+    background:radial-gradient(circle,#0b1d3a,#000);
+    overflow:hidden;
+    font-family:'Montserrat',sans-serif;
+    color:white;
+    text-align:center;
+}
+.snow{
+    position:fixed;
+    top:-10px;
+    background:white;
+    border-radius:50%;
+    animation:fall linear infinite;
+}
+@keyframes fall{to{transform:translateY(110vh);}}
+
+.heart{
+    position:fixed;
+    bottom:-10px;
+    animation:fly 6s linear infinite;
+}
+@keyframes fly{
+    to{transform:translateY(-110vh) scale(1.4);opacity:0;}
+}
+
+.box{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(255,255,255,.08);
+    padding:40px;
+    border-radius:25px;
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 30px rgba(255,0,0,.4);
+}
+h1{
+    font-family:'Pacifico',cursive;
+    font-size:55px;
+    color:#ff4d4d;
+    text-shadow:0 0 15px gold;
+}
+.name{
+    font-size:45px;
+    color:#ffd700;
+}
+.gift{
+    font-size:100px;
+    cursor:pointer;
+    animation:shake 1.5s infinite;
+}
+@keyframes shake{
+    0%,100%{transform:rotate(0);}
+    25%{transform:rotate(6deg);}
+    75%{transform:rotate(-6deg);}
+}
+.message{
+    display:none;
+    margin-top:20px;
+    font-size:20px;
+    line-height:1.8;
+}
+button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#ff4d4d,#ffd700);
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* Pháo hoa */
+.firework{
+    position:fixed;
+    font-size:25px;
+    animation:boom 2s ease-out forwards;
+}
+@keyframes boom{
+    to{transform:scale(3);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h1>🎄 Merry Christmas 🎄</h1>
+<div class="name">Thùy Dương</div>
+
+<div class="gift" onclick="openGift()">🎁</div>
+<div>(Chạm để mở quà)</div>
+
+<div class="message" id="msg"></div>
+
+<button onclick="playMusic()">Bật nhạc 🎶</button>
+</div>
+
+<audio id="music" loop>
+<source src="https://www.chosic.com/wp-content/uploads/2020/12/Jingle-Bells.mp3">
+</audio>
+
+<script>
+// Tuyết
+for(let i=0;i<120;i++){
+ let s=document.createElement("div");
+ s.className="snow";
+ s.style.left=Math.random()*100+"vw";
+ let size=Math.random()*4+3;
+ s.style.width=s.style.height=size+"px";
+ s.style.animationDuration=Math.random()*5+5+"s";
+ document.body.appendChild(s);
+}
+
+// Tim
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=Math.random()*3+4+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+},400);
+
+// Mở quà
+const text=[
+ "✨ Chúc Thùy Dương ngày càng xinh hơn",
+ "📚 Học giỏi hơn từng ngày",
+ "💖 Luôn vui vẻ, đáng yêu",
+ "🎁 Giáng Sinh thật ấm áp nha!"
+];
+let i=0;
+function openGift(){
+ document.querySelector(".gift").innerHTML="🎉";
+ let box=document.getElementById("msg");
+ box.style.display="block";
+ let interval=setInterval(()=>{
+   if(i<text.length){
+     box.innerHTML+=text[i]+"<br>";
+     firework();
+     i++;
+   }else clearInterval(interval);
+ },800);
+}
+
+// Pháo hoa
+function firework(){
+ let f=document.createElement("div");
+ f.className="firework";
+ f.innerHTML="✨";
+ f.style.left=Math.random()*100+"vw";
+ f.style.top=Math.random()*100+"vh";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),2000);
+}
+
+function playMusic(){
+ document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
